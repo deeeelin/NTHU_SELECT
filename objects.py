@@ -77,7 +77,12 @@ class selector:
                 else:
                     gpa,deviation=infos[name+":"+teacher]
 
+                if time == ' ' :
+                    time = 'X'
+
                 self.courses.append(course(num,name,teacher,time,possibility,gpa,deviation))
+                
+                
 
 
         self.tables={"BASE":deepcopy(self.courses)}
