@@ -98,6 +98,8 @@ class selector:
             
         }
         self.show_mode="html"
+
+        self.show(self.show_mode)
         
         
         
