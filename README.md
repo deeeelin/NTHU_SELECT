@@ -34,7 +34,13 @@ Before you begin, ensure you have met the following requirements:
 git clone https://github.com/deeeelin/NTHU_SELECT.git <folder path>
 ```
 
-2.  Go to the installed folder and execute main.py
+2.  Install required modules in requirements.txt
+
+```
+pip3 install -r <path of requirements.txt>
+```
+
+3.Go to the installed folder and execute main.py
 
 ***
 
