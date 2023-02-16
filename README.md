@@ -42,6 +42,7 @@ pip3 install -r <path of requirements.txt>
 
 3.Go to the installed folder and execute main.py
 
+
 ***
 
 ## **How to use NTHU_SELECT**
