@@ -5,10 +5,8 @@ from os import listdir,path
 LCES_dir=input("LCES directory : ")
 #"./resources/LCES/"
 CASD=input("CASD file : ")
-#"./resources/CASD.html"
-
+#./resources/CASD_111.html"
 ACIXSTORE=get_ACIXSTORE()
-
 LCES_lis=[]
 for LCES in listdir(LCES_dir):
     filename, file_extension = path.splitext(LCES)

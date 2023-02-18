@@ -32,6 +32,12 @@ def get_ACIXSTORE():
     return  ACIXSTORE
 
 class selector:
+
+    with open("extensions.py","r") as f:
+            extension_file = f.read()
+            f.close()
+    
+    exec(extension_file)
     
     
     def __init__(self,LCES_lis:List[bs],CASD:bs,ACIXSTORE) -> None:
@@ -48,11 +54,20 @@ class selector:
         for cours in courses_CASD:
 
             content=[cours.contents[i] for i in range(1,len(cours.contents),2)] 
-            num,name,teacher,people,gpa,deviation,none1,none2=[c.text.strip() for c in content]
-            
-            gpa,deviation=float(gpa),float(deviation)
+            num,name,teacher,people,gpa,deviation,score,score_diviation=[c.text.strip() for c in content]
+            if gpa == '' and deviation == '':
+                score,score_diviation=float(score),float(score_diviation)
+                gpa,deviation = -1 , -1 
+                tp =False
+              
+            else :
+                gpa,deviation=float(gpa),float(deviation)
+                score = -1
+                score_diviation = -1
+                tp= True
+              
 
-            infos[name+":"+teacher]=(gpa,deviation)
+            infos[name+":"+teacher]=(gpa,deviation,score,score_diviation,tp)
 
         for LCES in LCES_lis:
             body_LCES=LCES
@@ -75,12 +90,12 @@ class selector:
                 if not infos.get(name+":"+teacher):
                     continue
                 else:
-                    gpa,deviation=infos[name+":"+teacher]
+                    gpa,deviation,score,score_diviation,tp=infos[name+":"+teacher]
 
                 if time == ' ' :
                     time = 'X'
 
-                self.courses.append(course(num,name,teacher,time,possibility,gpa,deviation))
+                self.courses.append(course(num,name,teacher,time,possibility,gpa,deviation,score,score_diviation,tp))
                 
                 
 
@@ -94,9 +109,11 @@ class selector:
             "time":True,
             "possibility":True,
             "gpa":True,
-            "deviation":True
-            
+            "deviation":True,
+            "score":True,
+            "score_deviation":True
         }
+        
         self.show_mode="html"
 
         self.show(self.show_mode)
@@ -110,144 +127,163 @@ class selector:
     def run(self,cmds):
         cmds=cmds.split()
         
-        try:
-            match cmds[0]:
-                case "list":
-                    current=[]
-                    print("start listing....")
-        
-                    for course  in self.courses :
-                        for member in self.show_list:
-                            exec(member+"= course." + member)
-                            
-                        
-                        exec("current.append(course) if ("+" ".join(cmds[1:])+") else course\n")
-                    
-                    self.tables[self.cur_table]=current
-
-                    print("listed")
-                    
-                
-                    
-                case "filter":
-                    current=[]
-                    
-
-                    for course  in self.tables[self.cur_table] :
-                        for member in self.show_list:
-                            exec(member+"= course." + member)
-
-                        exec("current.append(course) if ("+" ".join(cmds[1:])+") else course\n")
-
-                    self.tables[self.cur_table]=current
-
-                    print("filtered!")
-
-                    
-                
-                case "change":
-                    
-                    if not cmds[1] in self.tables:
-                        print("no such table")
-                    else :
-                        self.cur_table=cmds[1]
-                        print("table changed !")
-
-
-                case "sort":
-                    #thing
-                    def func(course,string):
-
-                        for  member in self.show_list:
-                            exec(member+"= course." + member)
-                        
-                        loc = {}
-                        exec("answer="+string, locals(), loc)
-                        return loc["answer"]
+        #try:
+        match cmds[0]:
+            case "list":
+                current=[]
+                print("start listing....")
     
-                    if cmds[1]=="a":
-                        reverse="False"
-                    elif cmds[1] == "d":
-                        reverse="True"
-
+                for cs  in self.courses :
+                    loc={}
+                    for member in self.show_list.keys():   
+                        exec(member+"= cs." + member,locals(),loc)
+                        
+                    for key in loc.keys():
+                        locals()[key]=loc[key]
                     
-
-                    exec("self.tables[self.cur_table].sort(key=lambda course : func(course,'"+" ".join(cmds[2:])+"'),reverse="+reverse+")",locals())
-
-                    print("sorted !")
+                        
+                    
+                    exec("current.append(cs) if ("+" ".join(cmds[1:])+") else cs\n")
                 
-                case "function":
-                    
-                    exec("self.tables[self.cur_table]=self."+ " ".join(cmds[1:]))
-                    print("function executed !! ")
+                self.tables[self.cur_table]=current
 
-                case "remove":
-                    for i in cmds[1:]:
-                        number = int(i)
-                        del self.tables[self.cur_table][number]
-                    
-                    print("Removed !")
-
-                case "add_table":
-                    name=cmds[1]
-                    if name in self.tables:
-                        print("table existed !! ")
-                    else:
-                        if(len(cmds)>2):
-                            self.add_table(name,deepcopy(self.tables[cmds[2]]))
-                        else: 
-                            self.add_table(name)
-                        
-                        print("table added  !")
-
-                case "delete_table":
-                    name=cmds[1]
-                    if len(self.tables.keys())==1:
-
-                        print("need at least one table !!")
-                        
-                    else:
-
-                        self.delete_table(name)
-
-                        if name==self.cur_table:
-                            self.cur_table=list(self.tables.keys())[0]
-
-                        print("table deleted !")
-
-                case "reset":
-                    self.tables[self.cur_table]=deepcopy(self.courses)
-
-                    print("reset completed !")
-
-                case "show":
-                    for i in cmds[1:]:
-                        self.show_list[i]=True
-
-                case "unshow":
-                    for i in cmds[1:]:
-                        self.show_list[i]=False
-
-                case "show_mode":
-                        
-                        if cmds[1]=="html":
-                            self.show_mode="html"
-
-                        elif cmds[1]=="text":
-                            self.show_mode="fancy_grid"
-
-                case "renew_url":
-                        self.ACIXSTORE=get_ACIXSTORE()
-
-                case _:
-                    print("invalid command !! ")
+                print("listed")
+                
             
-        
-        except:
-            print("error !! ")
-        
-        
+                
+            case "filter":
+                current=[]
+                
+
+                for cs  in self.tables[self.cur_table] :
+                    
+                    loc={}
+                    for member in self.show_list.keys():   
+                        exec(member+"= cs." + member,locals(),loc)
+                        
+                    for key in loc.keys():
+                        locals()[key]=loc[key]
+                    
+                
+                    exec("current.append(cs) if ("+" ".join(cmds[1:])+") else cs\n")
+
+                self.tables[self.cur_table]=current
+
+                print("filtered!")
+
+                
+            
+            case "change":
+                
+                if not cmds[1] in self.tables:
+                    print("no such table")
+                else :
+                    self.cur_table=cmds[1]
+                    print("table changed !")
+
+
+            case "sort":
+                #thing
+                def func(course,string):
+
+                    for  member in self.show_list:
+                        exec(member+"= course." + member)
+                    
+                    loc = {}
+                    exec("answer="+string, locals(), loc)
+                    return loc["answer"]
+
+                if cmds[1]=="a":
+                    reverse="False"
+                elif cmds[1] == "d":
+                    reverse="True"
+
+                
+
+                exec("self.tables[self.cur_table].sort(key=lambda course : func(course,'"+" ".join(cmds[2:])+"'),reverse="+reverse+")",locals())
+
+                print("sorted !")
+            
+            case "function":
+                
+                exec("self.tables[self.cur_table]=self."+ " ".join(cmds[1:]))
+                print("function executed !! ")
+
+            case "remove":
+                for i in cmds[1:]:
+                    number = int(i)
+                    del self.tables[self.cur_table][number]
+                
+                print("Removed !")
+
+            case "add_table":
+                name=cmds[1]
+                if name in self.tables:
+                    print("table existed !! ")
+                else:
+                    if(len(cmds)>2):
+                        self.add_table(name,deepcopy(self.tables[cmds[2]]))
+                    else: 
+                        self.add_table(name)
+                    
+                    print("table added  !")
+
+            case "delete_table":
+                name=cmds[1]
+                if len(self.tables.keys())==1:
+
+                    print("need at least one table !!")
+                    
+                else:
+
+                    self.delete_table(name)
+
+                    if name==self.cur_table:
+                        self.cur_table=list(self.tables.keys())[0]
+
+                    print("table deleted !")
+
+            case "reset":
+                self.tables[self.cur_table]=deepcopy(self.courses)
+
+                print("reset completed !")
+
+            case "show":
+                for i in cmds[1:]:
+                    self.show_list[i]=True
+
+            case "unshow":
+                for i in cmds[1:]:
+                    self.show_list[i]=False
+
+            case "show_mode":
+                    
+                    if cmds[1]=="html":
+                        self.show_mode="html"
+
+                    elif cmds[1]=="text":
+                        self.show_mode="fancy_grid"
+
+            case "renew_url":
+                    self.ACIXSTORE=get_ACIXSTORE()
+            
+            case "convert":
+                for i in range(len(self.tables[self.cur_table])):
+                    if self.tables[self.cur_table][i].tp == False:
+                        self.tables[self.cur_table][i].gpa,self.tables[self.cur_table][i].deviation = self.SCORE_TO_GPA(self.tables[self.cur_table][i].score,self.tables[self.cur_table][i].score_deviation)
+                    else:
+                        self.tables[self.cur_table][i].score,self.tables[self.cur_table][i].score_deviation = self.GPA_TO_SCORE(self.tables[self.cur_table][i].gpa,self.tables[self.cur_table][i].deviation)
+                print("converted!")
+
+            case _:
+                print("invalid command !! ")
+    
         self.show(self.show_mode)
+
+        #execpt Exeption as e:
+
+
+       
 
         return 
                     
@@ -281,7 +317,9 @@ class selector:
             "time":"TIME",
             "possibility":"ENROLL POSSIBILITY",
             "gpa":"AVERAGE GPA",
-            "deviation":"DEVIATION"}
+            "deviation":"DEVIATION",
+            "score":"AVERAGE SCORE",
+            "score_deviation":"SCORE DEVIATION"}
         
         headers=[show_format[i] for i in to_show]
         
@@ -319,6 +357,37 @@ class selector:
                         news.string=courses[i].contents[ind+1].string
                         courses[i].contents[ind+1].clear()
                         courses[i].contents[ind+1].append(news)
+
+            courses=output.find("tbody").find_all("tr")
+
+            for i in range(len(courses)):
+                tmp=self.tables[self.cur_table][i]
+                if (not tmp.tp) and tmp.gpa != -1 :
+                    
+                    if not "gpa" in to_show:
+                        pass
+                    else:
+                        ind = to_show.index("gpa")
+                        courses[i].contents[ind+1].attrs['style']+="color:red;"
+
+                    if not "deviation" in to_show:
+                        pass
+                    else:
+                        ind = to_show.index("deviation")
+                        courses[i].contents[ind+1].attrs['style']+="color:red;"
+                    
+                elif (tmp.tp) and tmp.score != -1 :
+                    if not "score" in to_show:
+                        pass
+                    else:
+                        ind = to_show.index("score")
+                        courses[i].contents[ind+1].attrs['style']+="color:red;"
+                    if not "score_deviation" in to_show:
+                        pass
+                    else:
+                        ind = to_show.index("score_deviation")
+                        courses[i].contents[ind+1].attrs['style']+="color:red;"
+            
                 
 
             news=output.new_tag("h1",align='center' ,style="background-color:powderblue;border-radius: 12px;")
@@ -349,15 +418,11 @@ class selector:
         sys.stdout=sys.__stdout__
 
     
-    with open("extensions.py","r") as f:
-            extension_file = f.read()
-            f.close()
     
-    exec(extension_file)
 
 
 class course:
-    def __init__(self,num,name,teacher,time,possibility,gpa,deviation) -> None:
+    def __init__(self,num,name,teacher,time,possibility,gpa,deviation,score,score_deviation,tp) -> None:
         self.num=num
         self.name=name
         self.teacher=teacher
@@ -365,10 +430,14 @@ class course:
         self.possibility=possibility
         self.gpa=gpa
         self.deviation=deviation
+        self.score=score
+        self.score_deviation=score_deviation
+        self.tp=tp
+       
+
     def show(self,to_show):
 
         tmp = []
-        members=["num","name","teacher","time","possibility","gpa","deviation"]
         for m in to_show:
                 exec("tmp.append(self."+m+")")
     
