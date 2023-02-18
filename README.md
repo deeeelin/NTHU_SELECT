@@ -140,9 +140,9 @@ Result :
 
 * `sort` :
 
-   ``` sort a <sort key/sort function>``` -> sort the courses in the table with the given sort function , in ascending order
+   ``` sort a <sort key/sort function>``` -> sort the courses in the table with a sort function or a variable (like gpa,possibility...), in ascending order
 
-   ``` sort d <sort key/sort function>``` -> sort the courses in the table with the given sort function , in descending order 
+   ``` sort d <sort key/sort function>``` -> sort the courses in the table with a sort function or a variable, in descending order 
 
 ps. For the usage of sort function ,see 'MAKING YOUR OWN FUNCTIONS' part below 
 
