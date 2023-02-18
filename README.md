@@ -219,7 +219,7 @@ Result :
 
 ![Image](./README_sources/html.png)
 
-* `renew_url` : ```renew_url <url> ``` -> if link of the course doesn't leads to syllabus,sign in to curriculum again and get the new syllabus url
+* `renew_url` : ```renew_url``` -> if link of the course doesn't leads to syllabus,sign in to curriculum again and get the new syllabus url
 
 
 **TABLE FUNCTIONS:**
