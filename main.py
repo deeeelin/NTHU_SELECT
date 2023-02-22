@@ -1,7 +1,7 @@
 from objects import selector,make_root,get_ACIXSTORE
 from bs4 import BeautifulSoup as bs
 from os import listdir,path
-Debug = 1
+Debug = 0
 if Debug:
     LCES_dir="./resources/LCES/"
    
