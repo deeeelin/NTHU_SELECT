@@ -1,0 +1,5 @@
+2.0 features
+
+score,score_deviation,convert,free setting functions,converted mark red,fixed list,filter bugs ,
+
+主旨:提供一個平台自我分析

@@ -1,11 +1,17 @@
 from objects import selector,make_root,get_ACIXSTORE
 from bs4 import BeautifulSoup as bs
 from os import listdir,path
+Debug = 1
+if Debug:
+    LCES_dir="./resources/LCES/"
+   
+    CASD="./resources/CASD_11110.html"
+  
+else:
+    LCES_dir=input("LCES directory : ")
 
-LCES_dir=input("LCES directory : ")
-#"./resources/LCES/"
-CASD=input("CASD file : ")
-#./resources/CASD_111.html"
+    CASD=input("CASD file : ")
+
 ACIXSTORE=get_ACIXSTORE()
 LCES_lis=[]
 for LCES in listdir(LCES_dir):

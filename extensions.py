@@ -48,7 +48,7 @@ def courses_in_available_time(self,available):
     return current
 
 
-def amp(self):
+def test(self):
     return self.courses[:200]
 
 

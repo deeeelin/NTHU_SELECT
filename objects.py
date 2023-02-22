@@ -132,8 +132,10 @@ class selector:
             case "list":
                 current=[]
                 print("start listing....")
+
+                courses= deepcopy(self.courses)
     
-                for cs  in self.courses :
+                for cs  in courses :
                     loc={}
                     for member in self.show_list.keys():   
                         exec(member+"= cs." + member,locals(),loc)
@@ -154,7 +156,6 @@ class selector:
             case "filter":
                 current=[]
                 
-
                 for cs  in self.tables[self.cur_table] :
                     
                     loc={}
