@@ -20,11 +20,11 @@ Before you begin, ensure you have met the following requirements:
 1. Having basic python understanding (For advanced usage)
 2. You have a machine that is able to execute python 
 
-For macOS users ,if not installed python ,open command line : 
-```
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" && brew install python3
-```
-For other users ,download from https://www.python.org/downloads/
+    For macOS users ,if not installed python ,open command line : 
+    ```
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" && brew install python3
+    ```
+    For other users ,download from https://www.python.org/downloads/
 
 3. You have read the instructions for using NTHU_SELECT
 
