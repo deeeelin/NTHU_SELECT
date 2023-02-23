@@ -113,6 +113,8 @@ ps. value '-1' means information not provided
 
 *At,first ,we list query result of courses on a default table called "BASE"*
 
+![Image](./README_sources/reset.png)
+
 
 **BASIC FUNCTIONS:**
 
