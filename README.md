@@ -100,11 +100,11 @@ There are six information variable contained for each course :
 
 * `gpa` -> Average GPA of the course in past semester
 
-* `deviation` -> deviation of the course in past semester
+* `deviation` -> GPA deviation of the course in past semester
 
-* `score`-> average score of the course in past semester
+* `score`-> average original score of the course in past semester
 
-* `score_deviation`-> average deviation of the course in past semester
+* `score_deviation`-> average deviation of original score of the course in past semester
 
 ps. value '-1' means information not provided 
 
@@ -285,7 +285,7 @@ table deleted !
       
 
 
-Sample function in extensions.py : (given a string of available time , find the possible courses to attend in that time  )
+Sample function in extensions.py : (given a string of available time , filter the possible courses that is able to attend in that time  )
 
 ![Image](./README_sources/extension.png)
 
