@@ -111,7 +111,7 @@ ps. value '-1' means information not provided
 ### **Analyzing** :
 
 
-*At,first ,we list query result of courses on a default table called "BASE"*
+*After following the instructions above , there should be a file created under NTHU_SELECT's directory called "result.html", and information of courses are list on a default table called "BASE"*
 
 ![Image](./README_sources/reset.png)
 
