@@ -108,10 +108,14 @@ There are six information variable contained for each course :
 
 ps. value '-1' means information not provided 
 
+
+***
+
+
 ### **Analyzing** :
 
 
-*After following the instructions above , there should be a file created under NTHU_SELECT's directory called "result.html", and information of courses are list on a default table called "BASE"* .(About the viewing of results , see  **View result** part for more information. )
+After following the instructions above , there should be a file created under NTHU_SELECT's directory called "result.html", and information of courses are list on a default table called "BASE".(About the viewing of results , see  **View result** part below for more information. )
 
 ![Image](./README_sources/reset.png)
 
