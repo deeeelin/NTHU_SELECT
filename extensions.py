@@ -40,7 +40,7 @@ def GPA_TO_SCORE(self,gpa,deviation):
 def courses_in_available_time(self,available):
     current = []
     available_time=set([available[i:i+2] for i in range(0, len(available), 2)])
-    for c in self.courses:
+    for c in self.tables[self.cur_table]:
         course_time = set([c.time[i:i+2] for i in range(0, len(c.time), 2)])
         if course_time.issubset(available_time):
             current.append(c)

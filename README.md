@@ -98,10 +98,15 @@ There are six information variable contained for each course :
 
 * `possibility` -> possibility rate to enroll this course , ( 1 means 100% )
 
-* `gpa` -> Average GPA of the course in previous semester
+* `gpa` -> Average GPA of the course in past semester
 
-* `deviation` -> deviation of the course in previous semester
+* `deviation` -> deviation of the course in past semester
 
+* `score`-> average score of the course in past semester
+
+* `score_deviation`-> average deviation of the course in past semester
+
+ps. value '-1' means information not provided 
 
 ### **Analyzing** :
 
@@ -167,8 +172,19 @@ reset
 Result :
 
 ![Image](./README_sources/reset.png)
+ 
+* `convert`:```convert``` -> since there are classes provide original score informations , instead providing gpa informations ,so users can use this feature to "roughly" convert "gpa to score" or "score to gpa" , converted information will be marked red . Also, users can set their own customized converting function in "settings" section in extensions.py (see **MAKING YOUR OWN FUNCTIONS:** part below).
+
+Example:
+```
+convert
+```
+Result:
+
+![Image](./README_sources/convert.png)
 
 * `exit` : ```exit``` -> exit the program 
+
 
 **MORE FUNCTIONS:**
 
@@ -202,7 +218,7 @@ show_mode text
 ```
 Result :
 
-![Image](./README_sources/show_mode)
+![Image](./README_sources/show_mode.png)
 
 Example : 
 ```
@@ -257,8 +273,7 @@ table deleted !
 
 **MAKING YOUR OWN FUNCTIONS:**
  
-
-`function` : ```function <function(parameter)>``` -> users can define their own python analyzing function in extensions.py for individual usage ,make sure:
+* `function` : ```function <function(parameter)>``` -> users can define their own python analyzing function in extensions.py for individual usage ,make sure:
 
    * Briefly trace code of  objects.py to get more understanding of the program
       
@@ -270,9 +285,9 @@ table deleted !
       
 
 
-Sample function in extension.py : (given a string of available time , find the possible courses to attend in that time  )
+Sample function in extensions.py : (given a string of available time , find the possible courses to attend in that time  )
 
-![Image](./README_sources/extension)
+![Image](./README_sources/extension.png)
 
 Example application :
 
@@ -283,7 +298,18 @@ function courses_in_available_time('R1R2R3R4T1T2T3T4')
 Result :
 
 ![Image](./README_sources/function.png)
- 
+
+
+
+* `Converting functions`: 
+
+    Since  gpa and score informations cannot be directly converted ,so users can set their own
+converting functions in setting to convert these two datas in their own way.Please remember function "SCORE_TO_GPA" and "GPA_TO_SCORE"  can only be modified , but not removed !! 
+
+Default converting function in extensions.py : 
+
+![Image](./README_sources/settings.png)
+
 ***
 
 ## **View result :**
