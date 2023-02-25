@@ -18,6 +18,7 @@ Being a sophomore in NTHU , jumping through webpages for consideration of select
 Before you begin, ensure you have met the following requirements:
 
 1. Having basic python understanding (For advanced usage)
+
 2. You have a machine that is able to execute python 
 
     For macOS users ,if not installed python ,open command line : 
@@ -43,10 +44,15 @@ git clone https://github.com/deeeelin/NTHU_SELECT.git <folder path>
 2.  Install required modules in requirements.txt
 
 ```
-pip3 install -r <path of requirements.txt>
+cd <folder path>
+pip3 install -r requirements.txt
 ```
 
-3.Go to the installed folder and execute main.py
+3.Go to the installed folder and execute:
+
+```
+python3 main.py
+```
 
 ***
 
@@ -332,7 +338,7 @@ Default converting function in extensions.py :
 
 ## **View result :**
   
-   * If the show mode is html ,then there will be a file called "result.html" produced in the same directory of NTHU_SELECT , you can look up the result by using Chrome browser or VS code extensions .
+   * If the show mode is html ,then there will be a file called "result.html" produced in the same directory of NTHU_SELECT , you can look up the result by using Chrome browser or VS code extensions (Safari browser may cause encoding errors).
  
    * If the show mode is text,then there will be a file called  "result.txt" produced in the same directory of NTHU_SELECT 
 
