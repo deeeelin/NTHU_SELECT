@@ -72,7 +72,7 @@ CASD:
 3. Open the downloaded folder "CASD_files" and find the file named "xp03_m.html" , rename it: 
 ![Image](./README_sources/CASD_2.png)
 
-4. Enter the relative path of CASD file to the program
+ 4. Enter the relative path of CASD file to the program
 
 URL:
 
