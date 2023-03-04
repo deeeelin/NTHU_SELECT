@@ -32,11 +32,11 @@ Before you begin, ensure you have met the following requirements:
 ### To install NTHU_SELECT follow these steps:
 
 
-1.Clone or download the zip file
+1. Clone or download the zip file
 
-2.Install required python3 modules in requirements.txt using pip3 installer
+2. Install required python3 modules in requirements.txt using pip3 installer
 
-3.Go to the installed folder and execute main.py:
+3. Go to the installed folder and execute main.py:
 
 ***
 
