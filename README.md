@@ -19,13 +19,9 @@ Before you begin, ensure you have met the following requirements:
 
 1. Having basic python understanding (For advanced usage)
 
-2. You have a machine that is able to execute python 
+2. You have a machine that is able to execute python3 :
 
-    For macOS users ,if not installed python ,open command line : 
-    ```
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" && brew install python3
-    ```
-    For other users ,download from https://www.python.org/downloads/
+     if not , then download from : https://www.python.org/downloads/
 
 3. You have read the instructions for using NTHU_SELECT
 
@@ -36,23 +32,11 @@ Before you begin, ensure you have met the following requirements:
 ### To install NTHU_SELECT follow these steps:
 
 
-1.
-```
-git clone https://github.com/deeeelin/NTHU_SELECT.git <folder path>
-```
+1. Clone or download the zip file
 
-2.  Install required modules in requirements.txt
+2.  Install required python3 modules in requirements.txt using pip3 installer
 
-```
-cd <folder path>
-pip3 install -r requirements.txt
-```
-
-3.Go to the installed folder and execute:
-
-```
-python3 main.py
-```
+3.Go to the installed folder and execute main.py:
 
 ***
 
@@ -74,7 +58,7 @@ LCES :
 ![Image](./README_sources/LCES_2.png)
 
 3. Put one or more LCES html (obtaiined on step 2) in a directory (like the sample directory "LCES" in "resources" folder )
- ,and enter the directory path to the program 
+ ,and enter the relative directory path to the program 
 
 
 CASD: 
@@ -88,7 +72,7 @@ CASD:
 3. Open the downloaded folder "CASD_files" and find the file named "xp03_m.html" , rename it: 
 ![Image](./README_sources/CASD_2.png)
 
-4. Enter the path of CASD file to the program
+4. Enter the relative path of CASD file to the program
 
 URL:
 
