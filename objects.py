@@ -446,4 +446,4 @@ class course:
         return tmp
         
         #print(self.num," ",self.name," ",self.teacher," ",self.time," ",self.possibility," ",self.gpa," ",self.deviation)
-    ß
+    
