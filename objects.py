@@ -8,7 +8,7 @@ import extensions
 
 def make_root(path,encode='cp950'):
     """create the root bs4 object of a html """
-    data=open(path,mode='r',encoding=encode)
+    data=open(path,mode='r',encoding=encode,errors='ignore')
     root=bs(data.read(),"html.parser")
     return root
 
