@@ -10,7 +10,6 @@ def make_root(path,encode='cp950'):
     """create the root bs4 object of a html """
     data=open(path,mode='r',encoding=encode)
     root=bs(data.read(),"html.parser")
-    root.prettify()
     return root
 
 def get_ACIXSTORE():
@@ -304,9 +303,9 @@ class selector:
     def show(self,mode):
         table=[]
         if mode=="html":
-            sys.stdout=open(os.path.dirname(__file__)+"/result.html","w")
+            sys.stdout=open(os.path.dirname(__file__)+"/result.html","w",encoding='utf-8',errors='ignore')
         else:
-            sys.stdout=open(os.path.dirname(__file__)+"/result.txt","w")
+            sys.stdout=open(os.path.dirname(__file__)+"/result.txt","w",encoding='utf-8',errors='ignore')
 
         to_show=[]
         for j in self.show_list.keys():
@@ -447,4 +446,4 @@ class course:
         return tmp
         
         #print(self.num," ",self.name," ",self.teacher," ",self.time," ",self.possibility," ",self.gpa," ",self.deviation)
-    
+    ß
